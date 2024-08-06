@@ -13,9 +13,15 @@ class Note:
         self.width = self.height * 1.3
         self.x = x - self.width//2
         self.y = staff_y + line_interval//2*(8-self.index) - self.height//2
+        self.thickness = line_thickness
+        self.stem_length = line_interval * 3.5
 
     def draw(self, display):
         pygame.draw.ellipse(display, self.color, (self.x, self.y, self.width, self.height))
+        if self.index < 4:
+            pygame.draw.line(display, self.color, (self.x + self.width - self.thickness//2, self.y + self.height//2), (self.x + self.width - self.thickness//2, self.y+self.height//2 - self.stem_length), self.thickness)
+        else:
+            pygame.draw.line(display, self.color, (self.x + self.thickness//2, self.y + self.height//2), (self.x + self.thickness//2, self.y+self.height//2 + self.stem_length), self.thickness)
 
 
 class Staff:
@@ -38,7 +44,7 @@ class Staff:
     def update(self, speed):
         for note in self.notes:
             note.x -= speed
-            if note.x < -note.width:
+            if note.x < 860-note.width:
                 self.notes.remove(note)
 
     def add_note(self, start_pos, pitch):
