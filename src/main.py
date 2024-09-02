@@ -3,7 +3,7 @@ import pygame, random, time
 from constants import *
 from classes import *
 
-
+#asdf
 def main():
     display = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("Noteworthy")
